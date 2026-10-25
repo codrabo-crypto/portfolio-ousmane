@@ -1,0 +1,298 @@
+[
+  {
+    "id": "glpi",
+    "category": "Assistance",
+    "title": "Installer GLPI et suivre un incident",
+    "short": "Préparer le service sous Linux, vérifier la connexion MariaDB et suivre un incident de partage.",
+    "context": "Formation",
+    "period": "16 octobre 2026",
+    "tools": [
+      "GLPI",
+      "Ticket d’incident",
+      "Suivi écrit",
+      "Partage Samba"
+    ],
+    "proof": "Extraits d’installation, test MariaDB et vue anonymisée du ticket",
+    "proof_type": "Installation & ticket",
+    "role": "Préparation du laboratoire GLPI, vérification des prérequis, connexion à MariaDB et suivi d’un ticket de test.",
+    "need": "Mettre à disposition un service de support dans un laboratoire, puis documenter une demande simulée d’accès à un partage Samba.",
+    "environment": "Machine virtuelle Linux, gestionnaire zypper, Apache, PHP, MariaDB et SELinux. L’archive GLPI 11.0.11 apparaît dans la commande de téléchargement conservée.",
+    "steps": [
+      [
+        "Préparer les composants",
+        "Installer les composants web et SQL avec zypper, puis vérifier le contenu de l’archive GLPI téléchargée."
+      ],
+      [
+        "Analyser les obstacles",
+        "Lire les journaux Apache, contrôler le port HTTP, examiner la réponse HTTP 500 et les refus d’écriture SELinux."
+      ],
+      [
+        "Configurer la connexion SQL",
+        "Renseigner le serveur de base de données et vérifier le message « Connexion à la base de données réussie » dans l’installateur."
+      ],
+      [
+        "Utiliser le service support",
+        "Accéder aux écrans d’administration, puis consigner les vérifications d’un incident simulé de partage dans un ticket."
+      ]
+    ],
+    "difficulty": "La préparation rencontre un port HTTP occupé, des erreurs d’accès et une réponse HTTP 500. Les sorties de diagnostic montrent aussi des refus SELinux sur les fichiers de journal et le répertoire de sessions. La connexion SQL échoue d’abord à cause d’un nom de serveur incorrect, puis le test de connexion réussit.",
+    "result": "La séance conserve un test de connexion à MariaDB réussi, des vues de gestion des comptes et du parc, puis un ticket de test suivi jusqu’au statut clos. Ces éléments documentent davantage qu’une simple lecture de ticket.",
+    "tests": [
+      [
+        "Préparation GLPI",
+        "Archive téléchargée et liste de son contenu conservées."
+      ],
+      [
+        "Connexion MariaDB",
+        "Message de test de connexion réussi conservé."
+      ],
+      [
+        "Comptes et parc",
+        "Vues d’administration retrouvées dans les captures de la séance."
+      ],
+      [
+        "Ticket de test",
+        "Suivi et statut clos visibles dans la vue anonymisée."
+      ]
+    ],
+    "limits": [
+      "Laboratoire de formation, sans utilisateur de production.",
+      "Les extraits publics retirent les identifiants, adresses et informations d’accès.",
+      "La capture du ticket est anonymisée et recomposée ; les originaux restent privés.",
+      "Le test SQL réussi ne prouve pas une sécurisation complète ni la disponibilité dans la durée."
+    ],
+    "next": [
+      "Consolider une procédure de réinstallation et ses tests de contrôle.",
+      "Documenter une restauration et les contrôles de sécurité du service."
+    ],
+    "mapping": {
+      "E5.1": "partiel",
+      "E5.2": "trace",
+      "E5.5": "trace",
+      "E5.6": "partiel",
+      "SISR.2": "partiel"
+    },
+    "evidence_note": "Vue anonymisée et recomposée à partir de la capture source, avec comparaison du contenu utile. Elle ne constitue pas une capture brute ; l’original reste privé."
+  },
+  {
+    "id": "linux",
+    "category": "Administration",
+    "title": "Diagnostiquer un conflit de port",
+    "short": "Identifier pourquoi Apache ne démarre pas : Nginx occupe déjà le port HTTP.",
+    "context": "Formation",
+    "period": "16 octobre 2026",
+    "tools": [
+      "Linux",
+      "Apache",
+      "Nginx",
+      "Journaux",
+      "Sockets réseau",
+      "Samba",
+      "tar",
+      "cron",
+      "SELinux"
+    ],
+    "proof": "Journal du conflit HTTP et extraits Samba / cron",
+    "proof_type": "Journaux & planification",
+    "role": "Lecture du journal de service et identification du processus en écoute.",
+    "need": "Apache refuse de démarrer dans la machine virtuelle Linux. Le besoin est d’identifier la cause avant de modifier les services.",
+    "environment": "Machine virtuelle Linux du laboratoire. Apache et Nginx sont présents. La trace utile concerne le port HTTP 80. La même séance contient aussi un partage Samba et une tâche de sauvegarde planifiée.",
+    "steps": [
+      [
+        "Lire le journal",
+        "Repérer le message de port déjà utilisé et l’échec du démarrage d’Apache."
+      ],
+      [
+        "Contrôler les sockets",
+        "Consulter les ports en écoute et le processus qui les utilise."
+      ],
+      [
+        "Établir le constat",
+        "Relier l’écoute de Nginx sur le port 80 au refus de démarrage d’Apache."
+      ],
+      [
+        "Planifier la sauvegarde du partage",
+        "Dans la même séance, inscrire une tâche cron à 18 h pour archiver le partage Samba avec tar ; vérifier que cron est actif."
+      ]
+    ],
+    "difficulty": "L’échec du service peut faire penser à une erreur de configuration. Le journal doit être croisé avec l’état réel des ports, plutôt que de modifier les paramètres au hasard.",
+    "result": "Le conflit HTTP est identifié : Nginx écoute sur le port 80. La suite de la séance documente également une tâche cron quotidienne à 18 h pour archiver le partage Samba, ainsi que le service cron actif et une liste de contenu d’archive. La correction précise du conflit Apache n’est pas isolée dans une trace de test dédiée.",
+    "tests": [
+      [
+        "Journal Apache",
+        "Message de port occupé conservé."
+      ],
+      [
+        "Écoute HTTP",
+        "Nginx identifié sur le port 80."
+      ],
+      [
+        "Après correction",
+        "Pas de test conservé : aucune résolution définitive annoncée."
+      ],
+      [
+        "Planification",
+        "Ligne cron à 18 h conservée ; systemctl is-active cron répond active."
+      ],
+      [
+        "Archive du partage",
+        "Liste commun/ et commun/test-partage/ conservée ; elle ne constitue pas un test de restauration."
+      ]
+    ],
+    "limits": [
+      "Le diagnostic de port est documenté ; aucun test dédié après correction ne permet d’attribuer précisément sa résolution.",
+      "La planification et l’état actif de cron sont conservés ; le journal d’une exécution automatique à 18 h n’est pas fourni.",
+      "La présence d’une archive ne démontre pas une restauration complète.",
+      "Les identifiants, noms de machine et adresses internes ne sont pas publiés."
+    ],
+    "next": [
+      "Documenter le correctif HTTP retenu et ses tests de redémarrage et d’accès.",
+      "Vérifier une exécution automatique et réaliser un test de restauration du partage."
+    ],
+    "mapping": {
+      "E5.2": "trace",
+      "SISR.3": "trace",
+      "E5.1": "trace",
+      "E5.5": "partiel"
+    },
+    "evidence_note": "Extraits issus des sorties conservées pendant la séance ; identifiant de session, nom de machine et horodatages retirés."
+  },
+  {
+    "id": "reseau",
+    "category": "Réseau",
+    "title": "Relier un poste filaire et un portable Wi-Fi",
+    "short": "Étudier le câblage, DHCP et les paramètres d’un poste dans Packet Tracer.",
+    "context": "Formation",
+    "period": "Activité de formation",
+    "tools": [
+      "Packet Tracer",
+      "Ethernet",
+      "Wi-Fi",
+      "IPv4",
+      "DHCP",
+      "WPC300N"
+    ],
+    "proof": "Schéma pédagogique reconstitué depuis la fiche d’activité",
+    "proof_type": "Schéma pédagogique",
+    "role": "Travail sur le périmètre d’une activité de configuration réseau : connexions et contrôles étudiés.",
+    "need": "L’activité demande de créer un petit réseau : un PC filaire, un portable Wi-Fi, un routeur sans fil et un modem câble. Elle relie le câblage aux paramètres nécessaires pour communiquer.",
+    "environment": "Simulation Packet Tracer. La fiche prévoit une carte WPC300N pour le portable, un routeur Wi-Fi et un modem câble.",
+    "steps": [
+      [
+        "Repérer les connexions",
+        "Étudier la liaison Ethernet du PC au routeur et la liaison du routeur au modem."
+      ],
+      [
+        "Préparer le Wi-Fi",
+        "Identifier le module WPC300N prévu par l’activité et le réseau sans fil à rejoindre."
+      ],
+      [
+        "Lire les paramètres",
+        "Utiliser le principe DHCP et la commande ipconfig /all pour contrôler adresse, masque et passerelle."
+      ]
+    ],
+    "difficulty": "Une liaison physique ne suffit pas à garantir l’accès au réseau. Le raccordement, l’interface utilisée et les paramètres IPv4 doivent être vérifiés ensemble.",
+    "result": "La fiche et le fichier d’activité Packet Tracer ont été retrouvés. Le schéma représente le réseau demandé. L’état d’avancement du fichier PKA et les résultats de connectivité n’ont pas été vérifiés ; aucun score ni ping réussi n’est annoncé.",
+    "tests": [
+      [
+        "Topologie",
+        "Périmètre de la fiche d’activité représenté."
+      ],
+      [
+        "Paramètres IPv4",
+        "Contrôles étudiés : adresse, masque, passerelle."
+      ],
+      [
+        "Connectivité effective",
+        "Aucun résultat conservé ; non annoncée comme validée."
+      ]
+    ],
+    "limits": [
+      "Le schéma est pédagogique, pas une topologie d’exploitation réelle.",
+      "Le fichier PKA retrouvé est un fichier d’activité ; sa présence ne prouve pas que le TP a été terminé.",
+      "Aucun résultat de connectivité ni score n’est inventé."
+    ],
+    "next": [
+      "Conserver un fichier de simulation terminé et anonymisé.",
+      "Ajouter les sorties de contrôle et les tests de communication."
+    ],
+    "mapping": {
+      "E5.2": "partiel",
+      "SISR.1": "partiel",
+      "SISR.2": "partiel"
+    },
+    "evidence_note": "Schéma SVG créé à partir du périmètre de la fiche ; il ne constitue pas une capture d’exécution."
+  },
+  {
+    "id": "nro",
+    "category": "Coordination",
+    "title": "Appui technique et coordination au NRO",
+    "short": "Prioriser les interventions, aider les techniciens au diagnostic et suivre la qualité.",
+    "context": "Expérience terrain",
+    "period": "Septembre 2025 à février 2026",
+    "tools": [
+      "Photomètre",
+      "Réflectomètre",
+      "Plateformes de suivi",
+      "Canal collectif de questions techniques",
+      "Audits qualité et sécurité"
+    ],
+    "proof": "Description des missions et schéma de méthode",
+    "proof_type": "Méthode anonymisée",
+    "role": "Chef de chantier et supervision au NRO : suivi des priorités, appui aux techniciens par téléphone ou sur site, audits qualité et sécurité.",
+    "need": "Les interventions terrain nécessitent de partager les priorités, d’accompagner les techniciens bloqués dans leur diagnostic et de vérifier la qualité des actions réalisées. NRO signifie nœud de raccordement optique.",
+    "environment": "Contexte professionnel de télécommunications. Les clients, lieux, équipements identifiants, outils internes et données d’exploitation ne sont pas publiés.",
+    "steps": [
+      [
+        "Prioriser les interventions",
+        "Suivre les interventions au NRO et organiser les priorités depuis les plateformes internes."
+      ],
+      [
+        "Étayer le diagnostic",
+        "Contrôler les signaux optiques et utiliser photomètre et réflectomètre pour rechercher les pannes de connectivité."
+      ],
+      [
+        "Accompagner et escalader",
+        "Aider les techniciens par téléphone ou sur site et remonter les incidents qui nécessitent une escalade."
+      ],
+      [
+        "Partager et contrôler",
+        "Regrouper les questions techniques dans un canal collectif ; effectuer des audits qualité et sécurité et suivre les non-conformités."
+      ]
+    ],
+    "difficulty": "Un blocage terrain doit être qualifié avant escalade. Le contrôle des signaux et les mesures optiques servent à étayer le diagnostic, tandis que les questions récurrentes sont regroupées dans un canal collectif.",
+    "result": "Le parcours fourni décrit le suivi des interventions, les contrôles optiques, l’aide aux techniciens, la création d’un canal collectif de questions techniques et le suivi des non-conformités. L’expérience montre une pratique de diagnostic et de coordination ; aucun gain chiffré n’est avancé.",
+    "tests": [
+      [
+        "Période et responsabilités",
+        "Missions et période issues du CV fourni."
+      ],
+      [
+        "Méthodes de diagnostic",
+        "Mesures optiques, photomètre et réflectomètre explicitement cités dans le parcours."
+      ],
+      [
+        "Organisation du support",
+        "Appui à distance ou sur site, remontée des incidents et canal collectif décrits."
+      ],
+      [
+        "Preuve opérationnelle",
+        "Aucun document interne ou rapport client n’est diffusé."
+      ]
+    ],
+    "limits": [
+      "Le schéma décrit une méthode, pas l’architecture d’un opérateur.",
+      "Aucune donnée d’exploitation ni preuve client n’est publiée.",
+      "Cette expérience antérieure est présentée comme transférable ; son rattachement à un dossier E5 doit être confirmé avec l’équipe pédagogique."
+    ],
+    "next": [
+      "Préparer un exemple oral anonymisé de situation vécue.",
+      "Vérifier les justificatifs et périodes recevables avec l’établissement."
+    ],
+    "mapping": {
+      "E5.2": "partiel",
+      "E5.4": "partiel"
+    },
+    "evidence_note": "Le schéma illustre uniquement les missions décrites. Aucun document interne n’est remplacé par un document fictif."
+  }
+]

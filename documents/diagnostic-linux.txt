@@ -1,0 +1,16 @@
+LABORATOIRE LINUX — 16 OCTOBRE 2026
+Extraits des sorties conservées pendant le diagnostic.
+Identifiant de session, nom de machine et horodatages retirés.
+
+1. Démarrage d’Apache
+(98)Address already in use: AH00072: make_sock: could not bind to address [::]:80
+(98)Address already in use: AH00072: make_sock: could not bind to address 0.0.0.0:80
+no listening sockets available, shutting down
+apache2.service: Failed with result 'exit-code'.
+
+2. Socket en écoute
+State  Recv-Q  Send-Q  Local Address:Port  Peer Address:Port  Process
+LISTEN 0       4096    0.0.0.0:80          0.0.0.0:*         users:(("nginx",pid=3543,fd=6),("nginx",pid=3541,fd=6))
+
+Lecture : le port HTTP 80 est occupé par Nginx ; Apache ne peut pas y ouvrir une seconde écoute.
+Périmètre : constat du conflit de port, pas une preuve de déploiement en production.

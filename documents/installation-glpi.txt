@@ -1,0 +1,24 @@
+LABORATOIRE GLPI — 16 OCTOBRE 2026
+Extraits sélectionnés de la séance : identifiants et adresses retirés.
+Les coupures sont signalées par […]. Aucun mot de passe n’est reproduit.
+
+1. Archive GLPI
+Archive téléchargée : glpi-11.0.11.tgz
+Commande de contrôle : tar -tzf glpi-11.0.11.tgz | head
+Sortie :
+glpi/
+glpi/vendor/
+glpi/vendor/autoload.php
+[…]
+
+2. Diagnostic d’accès
+Contrôle HTTP : 500
+Journal SELinux (extraits abrégés) :
+avc: denied { write } […] name="_sessions" […] tcontext=unconfined_u:object_r:httpd_sys_content_t:s0 tclass=dir permissive=0
+avc: denied { append } […] name="php-errors.log" […] tclass=file permissive=0
+
+3. Installateur GLPI
+Étape 2 — Test de connexion à la base de données
+Connexion à la base de données réussie
+
+Lecture : préparation des composants, analyse des erreurs et connexion SQL réussie sont documentées. Ces extraits ne prouvent pas une configuration de production sécurisée.

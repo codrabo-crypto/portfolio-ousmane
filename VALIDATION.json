@@ -1,0 +1,15 @@
+{
+  "date": "2026-10-25",
+  "html_pages": 11,
+  "dom_and_local_reference_assertions": 359,
+  "http_files_status_200": 27,
+  "project_pdfs": 4,
+  "pdf_pages": 8,
+  "visual_pdf_review": true,
+  "browser_visual_review": false,
+  "browser_limitation": "Chrome launch failed before page load (SIGABRT)",
+  "lighthouse_run": false,
+  "public_deployment": false,
+  "direction": "bleu nuit et cyan, référence utilisateur",
+  "evidence_revision": "Séance Linux/GLPI/Samba/cron et CV réexaminés ; extraits anonymisés ajoutés"
+}

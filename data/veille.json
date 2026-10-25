@@ -1,0 +1,69 @@
+[
+  {
+    "title": "Équipements exposés : ne pas oublier la périphérie du réseau",
+    "publisher": "ANSSI · CERT-FR",
+    "date": "2026-03-11",
+    "displayDate": "11 mars 2026",
+    "topic": "Sécurité réseau",
+    "url": "https://www.cert.cyber.gouv.fr/cti/CERTFR-2026-CTI-002/",
+    "originalTitle": "Panorama de la cybermenace 2025",
+    "summary": "Le panorama décrit l’exploitation rapide de vulnérabilités sur les équipements de bordure et les services exposés sur Internet. Les attaques ne visent pas seulement les postes : l’accès au réseau et les équipements qui le protègent comptent aussi.",
+    "takeaway": "Connaître les équipements exposés, leur version et les correctifs disponibles. Lors d’un incident de connectivité, vérifier aussi le contexte de sécurité et remonter les anomalies."
+  },
+  {
+    "title": "openSUSE Leap 16 : un changement à connaître avant de dépanner",
+    "publisher": "Projet openSUSE",
+    "date": "2025-10-01",
+    "displayDate": "1er octobre 2025",
+    "topic": "Administration Linux",
+    "url": "https://news.opensuse.org/2025/10/01/next-chapter-opens-with-leap-release/",
+    "originalTitle": "Next Chapter Opens with Leap 16 Release",
+    "summary": "Leap 16 introduit notamment l’installateur Agama et utilise SELinux comme mécanisme de contrôle d’accès. La publication précise aussi les exigences matérielles et la durée de maintenance annoncée pour cette version.",
+    "takeaway": "Identifier la distribution et sa version avant d’appliquer une procédure. Un refus d’accès mérite un diagnostic du contrôle de sécurité avant toute modification de permissions."
+  },
+  {
+    "title": "Debian 13 : préparer une évolution de système",
+    "publisher": "Projet Debian",
+    "date": "2025-08-09",
+    "displayDate": "9 août 2025",
+    "topic": "Systèmes & maintenance",
+    "url": "https://www.debian.org/News/2025/20250809",
+    "originalTitle": "Debian 13 “trixie” released",
+    "summary": "L’annonce présente Debian 13, ses logiciels mis à jour et les points de vigilance pour passer de Debian 12 à 13. Elle recommande de sauvegarder les données et la configuration, puis de lire les notes de version avant une migration.",
+    "takeaway": "Préparer une mise à niveau : inventaire, sauvegarde et contrôle de compatibilité. Une machine virtuelle permet d’observer les changements avant une intervention sur un poste de production."
+  },
+  {
+    "title": "Fin de support Windows 10 : raisonner en cycle de vie",
+    "publisher": "Microsoft · Windows Experience Blog",
+    "date": "2025-06-24",
+    "displayDate": "24 juin 2025",
+    "updated": "25 juin 2026",
+    "topic": "Support & postes",
+    "url": "https://blogs.windows.com/windowsexperience/2025/06/24/stay-secure-with-windows-11-copilot-pcs-and-windows-365-before-support-ends-for-windows-10/",
+    "originalTitle": "Stay secure with Windows 11, Copilot+ PCs and Windows 365 before support ends for Windows 10",
+    "summary": "Microsoft rappelle la fin du support standard de Windows 10 au 14 octobre 2025 et décrit les possibilités de transition, dont les mises à jour de sécurité étendues sous conditions. L’article comporte des mises à jour : il faut distinguer fin du support standard et couverture particulière.",
+    "takeaway": "Un poste qui démarre encore n’est pas forcément maintenu. Vérifier l’édition, le cycle de support et les logiciels utilisés avant de proposer une migration ou une autre solution."
+  },
+  {
+    "title": "Réponse à incident : préparer et documenter le traitement",
+    "publisher": "NIST",
+    "date": "2025-04-03",
+    "displayDate": "3 avril 2025",
+    "topic": "Gestion des incidents",
+    "url": "https://www.nist.gov/news-events/news/2025/04/nist-revises-sp-800-61-incident-response-recommendations-and-considerations",
+    "originalTitle": "NIST Revises SP 800-61: Incident Response Recommendations and Considerations for Cybersecurity Risk Management",
+    "summary": "La révision 3 du guide SP 800-61 relie la réponse aux incidents à la gestion des risques et au cadre CSF 2.0. Détecter, répondre et rétablir le service s’inscrivent dans une organisation préparée, plutôt que dans une intervention improvisée.",
+    "takeaway": "Qualifier l’incident, conserver les traces et transmettre à la bonne équipe. L’exercice GLPI illustre cette traçabilité, sans constituer une mise en œuvre complète du référentiel."
+  },
+  {
+    "title": "Authentification multifacteur : protéger les comptes et les données",
+    "publisher": "CNIL",
+    "date": "2025-04-01",
+    "displayDate": "1er avril 2025",
+    "topic": "Comptes & accès",
+    "url": "https://www.cnil.fr/fr/recommandation-mfa",
+    "originalTitle": "Authentification multifacteur : les recommandations de la CNIL pour mieux protéger les données",
+    "summary": "La CNIL publie une recommandation sur l’authentification multifacteur. Elle relie la sécurisation des accès au choix de solutions qui prennent en compte la protection des données personnelles dès leur conception.",
+    "takeaway": "Aider à retrouver l’accès à un compte suppose de respecter la procédure de l’entreprise, les moyens d’authentification et les données personnelles. La MFA fait partie de cet accompagnement."
+  }
+]

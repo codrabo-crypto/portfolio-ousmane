@@ -1,0 +1,23 @@
+LABORATOIRE SAMBA / SAUVEGARDE — 16 OCTOBRE 2026
+Extraits sélectionnés, sans identifiant personnel ni adresse interne.
+
+1. Paramètres du partage (extrait)
+[commun]
+create mask = 0660
+directory mask = 0770
+path = /srv/samba/commun
+read only = No
+valid users = [compte du laboratoire masqué]
+
+2. Liste de contenu conservée pendant la séance
+commun/
+commun/test-partage/
+
+3. Tâche planifiée conservée
+0 18 * * * /usr/bin/tar -czf /backup/commun_$(/usr/bin/date +\%Y-\%m-\%d_\%H-\%M-\%S).tar.gz -C /srv/samba commun
+
+4. Contrôle du service
+Commande : systemctl is-active cron
+Réponse : active
+
+Limites : la tâche est prévue chaque jour à 18 h selon l’heure de la machine. Le journal de son exécution automatique et un test de restauration ne sont pas conservés dans ces extraits.
